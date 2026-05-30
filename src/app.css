@@ -1,0 +1,900 @@
+/*
+ * VS Code Builder — global stylesheet
+ *
+ * Inherits the Simsen Builder design system from Edge-Favorit-Builder and
+ * PPPC-Builder. CSS variable names match those projects verbatim so a cross-
+ * tool design refresh touches one source.
+ *
+ * Signature of the system: green-tinted shadows (rgba(90, 158, 37, ...))
+ * rather than neutral gray. That alone is what makes the Builder line look
+ * like a family.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Dark mode is the default. Light mode applied via [data-theme="light"] below.
+   Brand green stays the same in both themes — it's the spine of the Builder line. */
+:root {
+  --primary:             #5a9e25;
+  --primary-hover:       #6db832;
+  --primary-light:       #8fd04a;
+  --primary-dark:        #3d7018;
+  --primary-glow:        rgba(90, 158, 37, 0.45);
+  --primary-glow-strong: rgba(90, 158, 37, 0.7);
+  --accent:              #6db832;
+  --accent-light:        #8fd04a;
+  --background:          #0f140d;
+  --surface:             #181f15;
+  --text:                #e8ece5;
+  --text-secondary:      #9aa295;
+  --border:              #2a3322;
+  --shadow:              rgba(0, 0, 0, 0.4);
+  --shadow-hover:        rgba(90, 158, 37, 0.35);
+  --success:             #5a9e25;
+  --danger:              #ff5d6c;
+}
+
+:root[data-theme="light"] {
+  --primary:             #5a9e25;
+  --primary-hover:       #4a8620;
+  --primary-light:       #7cc242;
+  --primary-dark:        #3d7018;
+  --primary-glow:        rgba(90, 158, 37, 0.4);
+  --primary-glow-strong: rgba(90, 158, 37, 0.6);
+  --accent:              #6db832;
+  --accent-light:        #8fd04a;
+  --background:          #FAFAFA;
+  --surface:             #FFFFFF;
+  --text:                #1A1A1A;
+  --text-secondary:      #666666;
+  --border:              #E0E0E0;
+  --shadow:              rgba(90, 158, 37, 0.15);
+  --shadow-hover:        rgba(90, 158, 37, 0.3);
+  --success:             #5a9e25;
+  --danger:              #dc3545;
+}
+
+body {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ─── Header ────────────────────────────────────────────────────────── */
+
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--border);
+}
+
+header h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 2.5rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.logo {
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px var(--primary-glow));
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* ─── Section cards ─────────────────────────────────────────────────── */
+
+.config-section,
+.builder-section,
+.export-section,
+.script-section {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: box-shadow 0.3s ease;
+}
+
+.config-section:hover,
+.builder-section:hover,
+.export-section:hover,
+.script-section:hover {
+  box-shadow: 0 4px 20px var(--shadow-hover);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ─── Form controls ─────────────────────────────────────────────────── */
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.input-group input[type="text"],
+.input-group input[type="url"],
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(90, 158, 37, 0.2);
+}
+
+.input-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.input-hint {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-row .checkbox-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.checkbox-row .checkbox-label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.checkbox-row .checkbox-hint {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+/* ─── Button taxonomy ───────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  color: white;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--primary-glow-strong);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+  color: white;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--primary-glow-strong);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 10px rgba(90, 158, 37, 0.2);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--primary-glow-strong);
+}
+
+/* Fixed-width export/import buttons — the visual signature of the
+   data-in/data-out controls across all Builder apps. Don't change the 220px. */
+.btn.btn-export,
+.btn.btn-import {
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  height: 44px;
+  justify-content: center;
+  font-size: 0.875rem;
+  padding: 0.625rem 1rem;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+}
+
+.btn-export:hover:not(:disabled),
+.btn-import:hover:not(:disabled) {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-cancel {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 2px solid var(--border);
+}
+
+.btn-cancel:hover:not(:disabled) {
+  border-color: var(--text-secondary);
+  color: var(--text);
+}
+
+/* Smaller icon button for inline actions (remove, edit, etc.) */
+.icon-btn {
+  background: transparent;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background: rgba(90, 158, 37, 0.1);
+  color: var(--primary);
+}
+
+.icon-btn.danger:hover {
+  background: rgba(220, 53, 69, 0.15);
+  color: var(--danger);
+}
+
+/* ─── Advanced disclosure ───────────────────────────────────────────── */
+
+.advanced-disclosure {
+  margin-top: 1.5rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 1rem;
+}
+
+.advanced-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: inherit;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.advanced-toggle:hover {
+  background: rgba(90, 158, 37, 0.08);
+}
+
+.advanced-toggle .chevron {
+  transition: transform 0.2s ease;
+}
+
+.advanced-toggle.open .chevron {
+  transform: rotate(90deg);
+}
+
+.advanced-body {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  background: rgba(90, 158, 37, 0.04);
+  border-left: 3px solid var(--primary-light);
+  border-radius: 6px;
+}
+
+/* ─── Extension chip ────────────────────────────────────────────────── */
+
+.extension-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.6rem;
+}
+
+.extension-chip {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  transition: all 0.2s ease;
+}
+
+.extension-chip:hover {
+  border-color: var(--primary-light);
+  box-shadow: 0 1px 6px var(--shadow);
+}
+
+.extension-chip.checked {
+  border-color: var(--primary);
+  background: rgba(90, 158, 37, 0.05);
+}
+
+.custom-extension-list {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.custom-extension-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--background);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+}
+
+.custom-extension-row code {
+  flex: 1;
+  color: var(--text);
+}
+
+.custom-extension-row .version-pin {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ─── Script preview pane ───────────────────────────────────────────── */
+/* The terminal treatment from Edge-Favorit-Builder — dark green-on-near-black
+   for the script output. Perfect for PowerShell and shell script previews. */
+
+.script-preview {
+  width: 100%;
+  min-height: 320px;
+  padding: 1.25rem;
+  border: 2px solid rgba(90, 158, 37, 0.3);
+  border-radius: 16px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #1a2614 0%, #243320 50%, #1e2b18 100%);
+  color: #8fd04a;
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.3),
+    0 4px 20px rgba(90, 158, 37, 0.1),
+    0 0 0 1px rgba(90, 158, 37, 0.1);
+  text-shadow: 0 0 8px rgba(90, 158, 37, 0.4);
+  white-space: pre;
+  overflow: auto;
+}
+
+.script-preview:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow:
+    inset 0 2px 10px rgba(0, 0, 0, 0.3),
+    0 4px 25px rgba(90, 158, 37, 0.2),
+    0 0 30px rgba(90, 158, 37, 0.15),
+    0 0 0 1px rgba(90, 158, 37, 0.3);
+  text-shadow: 0 0 10px rgba(90, 158, 37, 0.5);
+}
+
+.script-preview::placeholder {
+  color: rgba(143, 208, 74, 0.4);
+  text-shadow: none;
+}
+
+.script-section {
+  border: 1px solid rgba(90, 158, 37, 0.1);
+  border-radius: 16px;
+}
+
+.tabbar {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 0.5rem 0.95rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.tab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+/* ─── Bundle output: scenario picker ────────────────────────────────── */
+/* Sits above the file rail. Answers "which deployment am I doing?" before
+   the user has to figure out which files they need. */
+
+.scenario-strip {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.85rem;
+}
+
+.scenario-tab {
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.scenario-tab:hover {
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.scenario-tab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.scenario-description {
+  background: rgba(90, 158, 37, 0.04);
+  border-left: 3px solid var(--primary-light);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.scenario-description p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.scenario-description .scenario-caveat {
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.scenario-description .scenario-caveat strong {
+  color: var(--primary);
+}
+
+/* Step number badge — used on scenario file rows instead of the language icon */
+.step-number {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.file-row.active .step-number {
+  background: white;
+  color: var(--primary);
+  box-shadow: none;
+}
+
+/* ─── Bundle output layout (file tree + preview) ────────────────────── */
+/* VS Code-style file rail on the left, script preview on the right. Mirrors
+   the muscle memory of the audience (their actual editor uses the same
+   pattern), and scales cleanly as more platforms / files are added. */
+
+.bundle-layout {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.bundle-files {
+  flex: 0 0 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.85rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  max-height: 540px;
+  overflow-y: auto;
+}
+
+.file-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.file-group-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: 0 0.25rem;
+}
+
+.file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--text);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.file-row:hover {
+  background: rgba(90, 158, 37, 0.08);
+  border-color: rgba(90, 158, 37, 0.15);
+}
+
+.file-row.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.file-row.active .file-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.file-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(90, 158, 37, 0.12);
+  color: var(--primary);
+  border-radius: 4px;
+}
+
+.file-row.active .file-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.file-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.file-name {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.82rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+.bundle-preview {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bundle-preview .script-preview {
+  flex: 1;
+  min-height: 400px;
+  max-height: 540px;
+}
+
+.bundle-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .bundle-layout {
+    flex-direction: column;
+  }
+  .bundle-files {
+    flex: 0 0 auto;
+    max-height: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .file-group {
+    flex: 1 1 220px;
+    min-width: 200px;
+  }
+}
+
+/* ─── Note / callout ────────────────────────────────────────────────── */
+
+.note {
+  padding: 0.85rem 1rem;
+  background: rgba(90, 158, 37, 0.08);
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.note strong {
+  color: var(--primary);
+}
+
+.note.warning {
+  background: rgba(220, 53, 69, 0.08);
+  border-left-color: var(--danger);
+}
+
+.note.warning strong {
+  color: var(--danger);
+}
+
+/* ─── Footer ────────────────────────────────────────────────────────── */
+
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin-bottom: 0.25rem;
+}
+
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Toast ─────────────────────────────────────────────────────────── */
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--surface);
+  color: var(--text);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 2000;
+  animation: slideInRight 0.3s ease;
+  border-left: 4px solid var(--primary);
+}
+
+.toast.error {
+  border-left-color: var(--danger);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.75rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .action-buttons {
+    width: 100%;
+  }
+
+  .btn.btn-export,
+  .btn.btn-import {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+}
